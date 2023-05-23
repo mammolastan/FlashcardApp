@@ -4,27 +4,28 @@ import { createDeck } from "../utils/api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { updateDeck } from "../utils/api";
 
-function DecksEdit({ thisDeck }) {
+function DecksEdit({ thisDeck, setThisDeck }) {
   const [formData, setFormdata] = useState({});
   let history = useHistory();
 
   const changeHandler = ({ target }) => {
-    setFormdata({ ...formData, [target.name]: target.value });
+    const newFormData = { ...formData, [target.name]: [target.value] };
+
+    setFormdata({ ...formData, [target.name]: [target.value] });
   };
 
   const submitDeck = (event) => {
     event.preventDefault();
     const updatedDeck = { ...thisDeck, ...formData };
-    console.log("updatedDeck")
-    console.log(updatedDeck)
+    setThisDeck(updatedDeck);
+
     async function pushDeck() {
       try {
-        console.log("in try");
         const response = await updateDeck(updatedDeck);
-        console.log("response")
-        console.log(response)
         history.push(`/decks/${thisDeck.id}`);
-      } catch (error) {console.log(error)}
+      } catch (error) {
+        console.log(error);
+      }
     }
     pushDeck();
   };

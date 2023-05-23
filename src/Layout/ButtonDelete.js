@@ -5,10 +5,6 @@ import { deleteDeck, deleteCard } from "../utils/api";
 function ButtonDelete({ setThisDeck, thisDeck, id, type }) {
   let history = useHistory();
   const [value, setValue] = useState(0); // integer state
-  //create your forceUpdate hook
-  const forceUpdate = () => {
-    return () => setValue((value) => value + 1); // update state to force render
-  };
 
   const handleDelete = () => {
     if (window.confirm("Are you sure?")) {
@@ -21,12 +17,13 @@ function ButtonDelete({ setThisDeck, thisDeck, id, type }) {
           }
         }
         deletethisDeck();
-      } else if (type == "card") {
+      } else if (type === "card") {
         async function deletethisCard() {
+          console.log("in deletethisCard()");
           try {
-            const response = await deleteCard(id);
             const updatedCards = thisDeck.cards.filter((card) => card.id != id);
-            setThisDeck({ ...thisDeck, cards: [updatedCards] });
+            setThisDeck( {...thisDeck, cards: updatedCards });
+            const response = await deleteCard(id);
           } catch (error) {
             console.log(error);
           }

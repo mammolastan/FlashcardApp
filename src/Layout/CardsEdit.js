@@ -7,12 +7,16 @@ import {
 } from "react-router-dom/cjs/react-router-dom";
 import { updateCard } from "../utils/api";
 
-function CardsEdit({ thisDeck }) {
+function CardsEdit({ thisDeck,setThisDeck }) {
   let history = useHistory();
   const params = useParams();
-  const thisCardNumber = params.cardId - 1;
-  const thisCard = thisDeck.cards[thisCardNumber];
+  const thisCardNumber = Number(params.cardId);
+  const thisCard = thisDeck.cards.find((card)=>card.id===thisCardNumber);
   const [formData, setFormdata] = useState({});
+  console.log("thisDeck:")
+  console.log(thisDeck)
+  console.log("My Logic:")
+  console.log(thisDeck.cards[0].id)
 
   const changeHandler = ({ target }) => {
     setFormdata({ ...formData, [target.name]: target.value });
@@ -25,22 +29,28 @@ function CardsEdit({ thisDeck }) {
     const updatedCard = { ...thisCard, ...formData };
     async function postnewCard() {
       const response = await updateCard(updatedCard);
-      console.log("response:");
+      console.log("New updatedCard response:");
       console.log(response);
+      
       history.push(`/decks/${thisDeck.id}`);
     }
     postnewCard();
   };
 
   useEffect(() => {
-    setFormdata({ front: [thisCard.front], back: [thisCard.back] });
+    console.log("In CardsEdit.");
+    console.log("thisCard:");
+    console.log(thisCard);
+    console.log("thisCardNumber")
+    console.log(thisCardNumber)
+    setFormdata({ front: thisCard?.front, back: thisCard?.back });
   }, []);
 
   return (
     <>
       <div className="container">
-        <Breadcrumbs path={[thisDeck.name, "Add Card"]} />
-        <h2>{thisDeck.name}: Add Card</h2>
+        <Breadcrumbs path={[thisDeck.name, "Edit Card"]} />
+        <h2>{thisDeck.name}: Edit Card</h2>
 
         <form onSubmit={handleSubmit}>
           <h5>Front:</h5>

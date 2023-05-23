@@ -32,8 +32,10 @@ function DeckSingle() {
 
   const handleNext = () => {
     // If atEnd = true, prompt user
-    if (atEnd && window.confirm("Would you like to restart the deck?")) {
-      history.go(0);
+    if (atEnd) {
+      if(window.confirm("Would you like to restart the deck?")) {history.go(0);}
+      else {history.push("/")}
+      
     } else {
       // If not yet at end, set side to front and increment card number
       setCardSide("front");
@@ -52,6 +54,9 @@ function DeckSingle() {
   useEffect(() => {
     async function getDeck() {
       try {
+        console.log("in the one-time cleanup useEffect in DeckSingle");
+        console.log("thisDeck");
+        console.log(thisDeck);
         const response = await readDeck(params.deckId);
         deckExists = true;
         setThisDeck(response);
@@ -61,11 +66,14 @@ function DeckSingle() {
       }
     }
     getDeck();
-  }, []);
+  }, [window.location]);
 
   useEffect(() => {
     if (thisDeck.cards) {
       setCardsTotal(thisDeck.cards.length);
+      console.log("in the thisDeck Depeendency");
+      console.log("thisDeck");
+      console.log(thisDeck);
     }
   }, [thisDeck]);
 
@@ -97,6 +105,8 @@ function DeckSingle() {
             </button>
           </Link>
           <ButtonDelete
+            thisDeck={thisDeck}
+            setThisDeck={setThisDeck}
             id={thisDeck.id}
             type="deck"
           />
@@ -108,6 +118,7 @@ function DeckSingle() {
               <>
                 <table>
                   <tbody>
+                    
                     <tr key={card.id}>
                       <td>{card.front}</td>
                       <td>{card.back}</td>
@@ -149,10 +160,9 @@ function DeckSingle() {
       </Route>
       <Route path={`/decks/:deckId/study`}>
         <div className="container">
-          <Breadcrumbs path={["card name", "study"]} />
-          <h2>Study - {thisDeck.name}</h2>
-          {console.log("thisDeck")}
-          {console.log(thisDeck)}
+          <Breadcrumbs path={[thisDeck.name, "study"]} />
+          <h2>{thisDeck.name}</h2>
+
           {thisDeck.cards.length > 2 ? (
             <div className="card">
               <div className="card-body">
@@ -170,20 +180,24 @@ function DeckSingle() {
                 >
                   Flip
                 </button>
-
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  onClick={handleNext}
-                >
-                  {atEnd ? "Restart" : "Next"}
-                </button>
+                {cardSide === "back" ? (
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={handleNext}
+                  >
+                    {atEnd ? "Restart" : "Next"}
+                  </button>
+                ) : (
+                  <span></span>
+                )}
               </div>
             </div>
           ) : (
             <>
               <p>
-                You only have {thisDeck.length} cards. Please add 3 or more.
+                Not enough cards. You only have {thisDeck.length} cards. Please
+                add 3 or more.
               </p>
               <button>Add Cards</button>
             </>
@@ -191,13 +205,22 @@ function DeckSingle() {
         </div>
       </Route>
       <Route path="/decks/:deckId/cards/new">
-        <CardsAdd thisDeck={thisDeck} />
+        <CardsAdd
+          setThisDeck={setThisDeck}
+          thisDeck={thisDeck}
+        />
       </Route>
       <Route path="/decks/:deckId/edit">
-        <DecksEdit thisDeck={thisDeck} />
+        <DecksEdit
+          thisDeck={thisDeck}
+          setThisDeck={setThisDeck}
+        />
       </Route>
       <Route path="/decks/:deckId/cards/:cardId/edit">
-        <CardsEdit thisDeck={thisDeck} />
+        <CardsEdit
+          thisDeck={thisDeck}
+          setThisDeck={setThisDeck}
+        />
       </Route>
     </Switch>
   ) : (

@@ -25,7 +25,7 @@ function DecksCreate({ decks, setDecks }) {
 
   return (
     <div>
-      <h2>Create deck</h2>
+      <h2>Create Deck</h2>
       <form onSubmit={submitDeck}>
         <label for="name">Deck name:</label>
         <br />

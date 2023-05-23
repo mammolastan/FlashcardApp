@@ -44,13 +44,11 @@ function Decks() {
           />
         </div>
       </Route>
-      <Route
-        path="/decks/:deckId"
-      >
+      <Route path="/decks/:deckId">
         <DeckSingle />
       </Route>
       <Route path="decks/:deckId/study">
-            <p>Nothing to see here</p>
+        <p>Nothing to see here</p>
       </Route>
     </Switch>
   );

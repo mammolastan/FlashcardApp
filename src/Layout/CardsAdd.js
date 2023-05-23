@@ -3,12 +3,14 @@ import Breadcrumbs from "./Breadcrumbs";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 import { createCard } from "../utils/api";
 
-function CardsAdd({ thisDeck }) {
+function CardsAdd({ thisDeck,setThisDeck }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const front = event.target.front.value;
     const back = event.target.back.value;
-    const newCard = { front: [front], back: [back], deckId: [thisDeck.id] };
+    const newCard = { front: front, back: back, deckId: thisDeck.id };
+    setThisDeck({...thisDeck, cards:[...thisDeck.cards,newCard]})
+    event.target.reset();
     async function postnewCard() {
       const response = await createCard(thisDeck.id, newCard);
       console.log("response:");
