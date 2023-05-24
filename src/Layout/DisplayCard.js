@@ -3,7 +3,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import ButtonDelete from "./ButtonDelete";
 import ButtonStudy from "./ButtonStudy";
 
-function DisplayCard({name, description, cards, id}) {  
+function DisplayCard({name, description, cards, id, decks, setDecks}) {  
   return (
     <div className="card">
       <div className="card-body">
@@ -17,7 +17,7 @@ function DisplayCard({name, description, cards, id}) {
         </Link>
         <ButtonStudy id={id}/>
 
-        <ButtonDelete id={id} type="deck"/>
+        <ButtonDelete id={id} type="deck" decks={decks} setDecks={setDecks}/>
       </div>
     </div>
   );

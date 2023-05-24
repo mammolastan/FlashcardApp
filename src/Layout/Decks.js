@@ -26,7 +26,7 @@ function Decks() {
       >
         <div>
           {decks ? (
-            decks.map((deck, index) => <DisplayCard {...deck} />)
+            decks.map((deck, index) => <DisplayCard {...deck} decks={decks} setDecks={setDecks} />)
           ) : (
             <p>No Decks</p>
           )}

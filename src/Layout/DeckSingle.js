@@ -160,7 +160,7 @@ function DeckSingle() {
       </Route>
       <Route path={`/decks/:deckId/study`}>
         <div className="container">
-          <Breadcrumbs path={[thisDeck.name, "study"]} />
+          <Breadcrumbs path={["This deck", "study"]} />
           <h2>{thisDeck.name}</h2>
 
           {thisDeck.cards.length > 2 ? (
