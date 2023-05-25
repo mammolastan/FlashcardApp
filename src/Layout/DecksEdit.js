@@ -4,7 +4,7 @@ import { createDeck } from "../utils/api";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { updateDeck } from "../utils/api";
 
-function DecksEdit({ thisDeck, setThisDeck }) {
+function DecksEdit({ thisDeck, setThisDeck,getDeck }) {
   const [formData, setFormdata] = useState({});
   let history = useHistory();
 
@@ -14,7 +14,7 @@ function DecksEdit({ thisDeck, setThisDeck }) {
     setFormdata({ ...formData, [target.name]: [target.value] });
   };
 
-  const submitDeck = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const updatedDeck = { ...thisDeck, ...formData };
     setThisDeck(updatedDeck);
@@ -37,7 +37,7 @@ function DecksEdit({ thisDeck, setThisDeck }) {
   return (
     <div className="container">
       <h2>Edit deck info</h2>
-      <form onSubmit={submitDeck}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name">Deck name:</label>
         <br />
         <textarea

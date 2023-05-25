@@ -26,6 +26,20 @@ function DeckSingle() {
   const [atEnd, setAtEnd] = useState(false);
   let deckExists = thisDeck.id;
 
+  async function getDeck() {
+    try {
+      console.log("in async function get deck");
+      console.log("thisDeck");
+      console.log(thisDeck);
+      const response = await readDeck(params.deckId);
+      deckExists = true;
+      setThisDeck(response);
+    } catch (error) {
+      deckExists = false;
+      console.log(error);
+    }
+  }
+
   const handleFlip = () => {
     cardSide === "front" ? setCardSide("back") : setCardSide("front");
   };
@@ -33,9 +47,11 @@ function DeckSingle() {
   const handleNext = () => {
     // If atEnd = true, prompt user
     if (atEnd) {
-      if(window.confirm("Would you like to restart the deck?")) {history.go(0);}
-      else {history.push("/")}
-      
+      if (window.confirm("Would you like to restart the deck?")) {
+        history.go(0);
+      } else {
+        history.push("/");
+      }
     } else {
       // If not yet at end, set side to front and increment card number
       setCardSide("front");
@@ -52,19 +68,7 @@ function DeckSingle() {
   }, [thisCardNumber]);
 
   useEffect(() => {
-    async function getDeck() {
-      try {
-        console.log("in the one-time cleanup useEffect in DeckSingle");
-        console.log("thisDeck");
-        console.log(thisDeck);
-        const response = await readDeck(params.deckId);
-        deckExists = true;
-        setThisDeck(response);
-      } catch (error) {
-        deckExists = false;
-        console.log(error);
-      }
-    }
+    console.log("in the one-time cleanup useEffect in DeckSingle");
     getDeck();
   }, [window.location]);
 
@@ -113,12 +117,11 @@ function DeckSingle() {
 
           <h2> Cards </h2>
 
-          {thisDeck.cards.length > 0 ? (
+          {thisDeck.cards.length > 2 ? (
             thisDeck.cards.map((card) => (
               <>
                 <table>
                   <tbody>
-                    
                     <tr key={card.id}>
                       <td>{card.front}</td>
                       <td>{card.back}</td>
@@ -152,7 +155,7 @@ function DeckSingle() {
             ))
           ) : (
             <p>
-              This deck has been created, but there are no cards yet. Please add
+              This deck has been created, but there are not enough cards yet. Please add
               cards.
             </p>
           )}
@@ -208,18 +211,21 @@ function DeckSingle() {
         <CardsAdd
           setThisDeck={setThisDeck}
           thisDeck={thisDeck}
+          getDeck={getDeck}
         />
       </Route>
       <Route path="/decks/:deckId/edit">
         <DecksEdit
           thisDeck={thisDeck}
           setThisDeck={setThisDeck}
+          getDeck={getDeck}
         />
       </Route>
       <Route path="/decks/:deckId/cards/:cardId/edit">
         <CardsEdit
           thisDeck={thisDeck}
           setThisDeck={setThisDeck}
+          getDeck={getDeck}
         />
       </Route>
     </Switch>

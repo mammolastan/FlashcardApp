@@ -2,39 +2,30 @@
   "decks": [
     {
       "id": 1,
-      "name": [
-        "ssRe2ndering in React EDITSssdas"
-      ],
-      "description": [
-        [
-          [
-            "Reacts component structure allowsass for quickly building a complex web application that relies on DOM manipulation. "
-          ]
-        ]
-      ]
+      "name": "111ssRe2ndering in React EDITSssdas",
+      "description": "Reacts component structure allowsass for quickly building a complex web application that relies on DOM manipulation. "
     },
     {
       "name": "React Router",
       "description": "React Router is a collection of navigational components that compose declaratively with your application.",
       "id": 2
+    },
+    {
+      "name": "DN",
+      "description": "DD",
+      "id": 3
     }
   ],
   "cards": [
     {
-      "id": 1,
-      "front": "Differentiate between Real DOM and Virtual DOM.",
-      "back": "Virtual DOM updasdsdtes are faster but do not directly update the ssHTML",
-      "deckId": 1
-    },
-    {
       "id": 2,
-      "front": "How do you modify the state of a different React component?",
+      "front": "TTTTTTTFRESHHow do you modify the state of a different React component?",
       "back": "Not at all! State isss visible to the component only.",
       "deckId": 1
     },
     {
       "id": 3,
-      "front": "How do you pass data 'down' to a React dchild component?",
+      "front": "111How do you pass data 'down' to a React dchild component?",
       "back": "As properties or propssss",
       "deckId": 1
     },
@@ -151,66 +142,6 @@
       "id": 15
     },
     {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasd"
-      ],
-      "deckId": 3,
-      "id": 16
-    },
-    {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasdasdsa"
-      ],
-      "deckId": 3,
-      "id": 17
-    },
-    {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasdasdsa"
-      ],
-      "deckId": 3,
-      "id": 18
-    },
-    {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasdasdsa"
-      ],
-      "deckId": 3,
-      "id": 19
-    },
-    {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasdasdsa"
-      ],
-      "deckId": 3,
-      "id": 20
-    },
-    {
-      "front": [
-        "asdsa"
-      ],
-      "back": [
-        "asdasdasdsa"
-      ],
-      "deckId": 3,
-      "id": 21
-    },
-    {
       "front": "Jjjjj",
       "back": "Jjjjj",
       "deckId": 1,
@@ -241,16 +172,46 @@
       "id": 26
     },
     {
-      "front": "zzzz",
-      "back": "zzzzz",
+      "front": "AddF",
+      "back": "AddB",
       "deckId": 1,
       "id": 27
     },
     {
-      "front": "FFF",
-      "back": "FFF",
+      "front": "AddE",
+      "back": "AddR",
       "deckId": 1,
       "id": 28
+    },
+    {
+      "front": "Add3",
+      "back": "Add4",
+      "deckId": 1,
+      "id": 29
+    },
+    {
+      "front": "RRR",
+      "back": "RRR",
+      "deckId": 1,
+      "id": 30
+    },
+    {
+      "front": "DFF",
+      "back": "DFV",
+      "deckId": 3,
+      "id": 32
+    },
+    {
+      "front": "DVC",
+      "back": "DCC",
+      "deckId": 3,
+      "id": 33
+    },
+    {
+      "front": "ADA",
+      "back": "ADD",
+      "deckId": 3,
+      "id": 34
     }
   ]
 }
